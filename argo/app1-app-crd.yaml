@@ -8,7 +8,13 @@ spec:
   source:
     repoURL: https://github.com/cmboss/app1-config.git
     targetRevision: HEAD
-    path: config
+    path: app1-helm
+    helm:
+      releaseName: app1
   destination:
     server: https://kubernetes.default.svc
     namespace: app1-ns
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
