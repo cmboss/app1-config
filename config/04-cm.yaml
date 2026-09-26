@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app1-config
+  namespace: app1-ns
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+data:
+  index.html: |
+    <html>
+      <head>
+        <title>Cloud With VarJosh</title>
+      </head>
+      <body>
+        <div class="box">
+          <h1>Welcome to Cloud With VarJosh!</h1>
+        </div>
+      </body>
+    </html>
+
