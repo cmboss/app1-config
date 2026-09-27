@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: app1-nvirginia-cm
-  namespace: app1-nvirginia-ns
+  namespace: app1-cluster2-ns
 data:
   index.html: |
     <html>

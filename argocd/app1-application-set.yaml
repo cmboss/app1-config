@@ -11,9 +11,11 @@ spec:
   generators:
   - list:
       elements:
-      - clusterName: in-cluster
+      - clusterName: cluster1
+        destinationName: in-cluster
         namespace: app1-cluster1-ns
-      - clusterName: kubernetes-admin@kubernetes-cluster-b
+      - clusterName: cluster2
+        destinationName: kubernetes-admin@kubernetes-cluster-b
         namespace: app1-cluster2-ns
 
   template:
@@ -26,7 +28,7 @@ spec:
         targetRevision: main
         path: "{{.clusterName}}/manifests"
       destination:
-        name: "{{.clusterName}}"
+        name: "{{.destinationName}}"
         namespace: "{{.namespace}}"
       syncPolicy:
         automated:
@@ -34,3 +36,4 @@ spec:
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
+

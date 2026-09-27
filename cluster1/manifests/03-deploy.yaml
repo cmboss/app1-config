@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: app1-mumbai-deploy
-  namespace: app1-mumbai-ns
+  namespace: app1-cluster1-ns
 spec:
   replicas: 2
   selector:
