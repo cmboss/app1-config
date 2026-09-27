@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: app1-multi-cluster
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+
+  generators:
+  - list:
+      elements:
+      - clusterName: in-cluster
+        namespace: app1-cluster1-ns
+      - clusterName: kubernetes-admin@kubernetes-cluster-b
+        namespace: app1-cluster2-ns
+
+  template:
+    metadata:
+      name: "app1-{{.clusterName}}"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/cmboss/app1-config.git
+        targetRevision: main
+        path: "{{.clusterName}}/manifests"
+      destination:
+        name: "{{.clusterName}}"
+        namespace: "{{.namespace}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
